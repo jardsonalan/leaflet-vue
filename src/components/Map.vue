@@ -4,10 +4,12 @@ import { ref, onMounted, watchEffect } from 'vue';
 import { useGeolocation } from '@vueuse/core';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { VCard, VCardText, VCardTitle, VCol, VRow } from 'vuetify/components';
 
-const { coords, isSupported, error } = useGeolocation()
+const { coords } = useGeolocation()
 const latitude = ref(0)
 const longitude = ref(0)
+const zoomMap = ref(22)
 
 let map: leaflet.Map
 
@@ -18,7 +20,11 @@ watchEffect(()=>{
     console.log(latitude.value, longitude.value)
 
     if (map) {
-      map.setView([latitude.value, longitude.value], 13)
+      map.setView([latitude.value, longitude.value], zoomMap.value)
+
+      if (latitude.value && longitude.value) {
+        leaflet.marker([latitude.value, longitude.value]).addTo(map)
+      }
     }
   } else {
     console.log('erro')
@@ -26,7 +32,7 @@ watchEffect(()=>{
 })
 
 onMounted(() => {
-  map = leaflet.map('map').setView([latitude.value, longitude.value], 13)
+  map = leaflet.map('map').setView([latitude.value, longitude.value], zoomMap.value)
 
   leaflet.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -41,11 +47,26 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="map"></div>
-  <p>Latitude: {{ coords.latitude }}</p>
-  <p>Longitude: {{ coords.longitude }}</p>
-  <p>{{ isSupported }}</p>
-  <p>{{ error }}</p>
+  <VContainer>
+    <div id="map"></div>
+    <!-- <p>Latitude: {{ coords.latitude }}</p>
+    <p>Longitude: {{ coords.longitude }}</p> -->
+    <h2 class="text-center my-4">Essa é sua localização</h2>
+    <VRow>
+      <VCol cols="12" md="6">
+        <VCard>
+          <VCardTitle>Latitude:</VCardTitle>
+          <VCardText class="text-subtitle-1">{{ coords.latitude !== Number.POSITIVE_INFINITY ? coords.latitude : 0 }}</VCardText>
+        </VCard>
+      </VCol>
+      <VCol cols="12" md="6">
+        <VCard>
+          <VCardTitle>Longitude:</VCardTitle>
+          <VCardText class="text-subtitle-1">{{ coords.longitude !== Number.POSITIVE_INFINITY ? coords.longitude : 0 }}</VCardText>
+        </VCard>
+      </VCol>
+    </VRow>
+  </VContainer>
 </template>
 
 <style scoped>
