@@ -12,36 +12,40 @@ const longitude = ref(0)
 const zoomMap = ref(22)
 
 let map: leaflet.Map
+let marker: leaflet.Marker
 
 watchEffect(()=>{
+  // Verifica se os valores da latitude e longitude no coords são diferentes de Infinity
   if (coords.value.latitude !== Number.POSITIVE_INFINITY && coords.value.longitude !== Number.POSITIVE_INFINITY) {
-    latitude.value = coords.value.latitude
-    longitude.value = coords.value.longitude
-    console.log(latitude.value, longitude.value)
+    latitude.value = coords.value.latitude // Armazena a latitude do usuário na variável reativa (latitude)
+    longitude.value = coords.value.longitude // Armazena a longitude do usuário na variável reativa (longitude)
 
     if (map) {
+      // Pega a localização do usuário e cria o mapa
       map.setView([latitude.value, longitude.value], zoomMap.value)
 
-      if (latitude.value && longitude.value) {
-        leaflet.marker([latitude.value, longitude.value]).addTo(map)
+      // Remove o marcador caso ele exista
+      if (marker) {
+        marker.remove()
       }
+
+      // Adiciona um marcador no mapa
+      marker = leaflet.marker([latitude.value, longitude.value]).addTo(map)
     }
   } else {
-    console.log('erro')
+    console.log('erro') // Exibe uma mensagem de erro no console, caso não consiga pegar a localização do usuário
   }
 })
 
 onMounted(() => {
+  // Cria o mapa na montagem no site
   map = leaflet.map('map').setView([latitude.value, longitude.value], zoomMap.value)
 
+  // Direitos autorais dos criadores
   leaflet.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(map);
-
-  if (latitude.value && longitude.value) {
-    leaflet.marker([latitude.value, longitude.value]).addTo(map)
-  }
 })
 
 </script>
@@ -49,8 +53,6 @@ onMounted(() => {
 <template>
   <VContainer>
     <div id="map"></div>
-    <!-- <p>Latitude: {{ coords.latitude }}</p>
-    <p>Longitude: {{ coords.longitude }}</p> -->
     <h2 class="text-center my-4">Essa é sua localização</h2>
     <VRow>
       <VCol cols="12" md="6">
