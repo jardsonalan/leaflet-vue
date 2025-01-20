@@ -1,39 +1,28 @@
 # leaflet-vue
 
-This template should help get you started developing with Vue 3 in Vite.
+É uma pequena aplicação com o objetivo de mostrar a latitude e longitude do usuário, através da sua localização em tempo real.
 
-## Recommended IDE Setup
+**Recomendação:** (*Caso acesse com sua localização do dispositivo desativada*) 
+- Ative a localização do seu dispositivo e atualize a página.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+**Observação:** O marcador está com um bug de não mostrar a imagem do ícone.
 
-## Type Support for `.vue` Imports in TS
+## Tecnologias utilizadas:
+- Vue3.js
+- Leaflet
+- TypeScript
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
+## Instruções para rodar o projeto em sua máquina:
+1. Instale as depedências do projeto:
 ```sh
 npm install
 ```
+ou
+```sh
+npm i
+```
 
-### Compile and Hot-Reload for Development
-
+2. Rode o projeto:
 ```sh
 npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```
