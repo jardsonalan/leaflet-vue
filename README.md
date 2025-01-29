@@ -1,4 +1,4 @@
-# Leaflet-Vue
+# Mapa Interativo com Vue.js
 
 Uma aplicação que exibe a latitude e longitude do usuário com base na sua localização em tempo real.
 
