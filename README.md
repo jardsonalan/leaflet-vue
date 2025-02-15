@@ -8,14 +8,10 @@ Caso acesse com a **localização do dispositivo desativada**, ative-a e atualiz
 ## ⚠️ Observação 
 O marcador da localização está com um **bug** que impede a exibição da imagem do ícone. 
 
----
-
 ## 🚀 Tecnologias Utilizadas
 - **Vue.js (versão 3)**: Framework progressivo para a construção de interfaces de usuário.
 - **Leaflet**: Biblioteca de mapas interativos.
 - **TypeScript**: Superconjunto de JavaScript que adiciona tipagem estática.
-
----
 
 ## 🛠️ Como Rodar o Projeto
 1. Clone o repositório:
@@ -48,13 +44,9 @@ O marcador da localização está com um **bug** que impede a exibição da imag
     npm run dev
     ```
 
----
-
 ## 📋 Funcionalidades
 - Exibição da latitude e longitude do usuário em tempo real.
 - Atualização automática da localização (caso permitida pelo navegador).
-
----
 
 ## 💻 Pré-requisitos
 - Node.js instalado (versão mínima recomendada: 16.x).
